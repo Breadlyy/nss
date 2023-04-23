@@ -1,0 +1,21 @@
+.funny
+{
+    font-style: oblique;
+    color: green;
+}
+
+body{
+    margin: 0;
+    padding: 0;
+}
+
+div{
+    margin: 10% 20% 40% 10%;
+    width: 60%;
+    padding: 40px 5% 40px 5%;
+    font-size: 150%;
+    border: 20px solid pink;
+    border-radius: 20%;
+    text-align: center;
+
+}
