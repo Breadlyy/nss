@@ -6,7 +6,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import org.springframework.context.annotation.Role;
+
 
 @Entity
 @Table(name = "account")
@@ -46,6 +46,11 @@ public class Account {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+    }
+
+    public Account(String email, String password) {
+        this.email = email;
+        this.password = password;
     }
 
     public int getId() {

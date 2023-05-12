@@ -1,9 +1,11 @@
 package com.nss.account;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import java.util.List;
@@ -12,11 +14,13 @@ import java.util.List;
 @Controller
 public class AccountController {
 
-    private AccountService accountService;
-    BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+    private final AccountService accountService;
+
+    @Autowired
     public AccountController(AccountService accountService)
     {
         this.accountService = accountService;
+
     }
 
     @GetMapping("/")
@@ -51,24 +55,17 @@ public class AccountController {
     @PostMapping("/save")
     public String saveAccount(@ModelAttribute("account") Account account)
     {
-
-        String password = account.getPassword();
-        String hashedPassword = passwordEncoder.encode(password);
-        account.setPassword(hashedPassword);
-        accountService.save(account);
-        if(account.getRole() == "seller") return "redirect:accounts/seller-page";
-        //return "redirect:/api/account/list";
-        return "accounts/seller-page";
-    }
-    @PostMapping("/login")
-    public String login(@ModelAttribute("account") Account account)
-    {
-        String password = accountService.findByEmail(account.getEmail()).getPassword();
-        if (password.equals(account.getPassword()))
-        {
-            return "accounts/seller-page";
-        }
+        accountService.registerNewUserAccount(account);
+        if(account.getRole().equals("seller")) return "accounts/seller-page";
+        if(account.getRole().equals("buyer")) return "accounts/buyer-page";
         //return "redirect:/api/account/list";
         return null;
+    }
+    @PostMapping("/signIn")
+    public String login(@ModelAttribute("account") Account account)
+    {
+        Account user = accountService.login(account.getEmail(), account.getPassword());
+        if(user != null) return "accounts/seller-page";
+        return "accounts/buyer-page";
     }
 }

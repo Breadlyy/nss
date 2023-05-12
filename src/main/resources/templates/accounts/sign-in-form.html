@@ -11,11 +11,10 @@
 <body>
 <div class="container">
     <br><br>
-    <form action="#" th:action="@{/login}"
-          th:object="${account}" method="POST">
-        <input type="hidden" th:field="*{id}">
-        <input type="text" th:field="*{email}" class="form-control mb-4 w-25" placeholder="Email">
-        <input type="password" th:field="*{password}" class="form-control mb-4 w-25" placeholder="Password">
+    <form action="#"  th:object="${account}" th:action="@{/signIn}" method="POST">
+        <input type="text" name="email" th:field="*{email}" class="form-control mb-4 w-25" placeholder="email">
+        <input type="text"  name="password" th:field="*{password}"class="form-control mb-4 w-25" placeholder="password">
+
         <button type="submit" class="btn btn-info col-2">Save</button>
     </form>
 
