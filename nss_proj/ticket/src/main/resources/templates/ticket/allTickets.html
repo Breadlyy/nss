@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>My Page</title>
+</head>
+<body>
+
+
+<table>
+    <thead>
+
+    </thead>
+    <tbody>
+    <nav>
+        <a href="/yourTickets">Available tickets</a>
+    </nav>
+    <h2>Buy tickets</h2>
+    <tr th:each="ticket : ${tickets}">
+        <td>
+            <form th:action="@{/addTicket}"  method="post">
+                <input type="text" name="id" th:value="*{ticket.id}" hidden>
+            Ticket id: <span th:field="*{ticket.getId()}" th:text="*{ticket.id}"></span>;
+            seat:<span th:text="*{ticket.seat}"></span>;
+            number :<span th:text="*{ticket.number}"></span>
+                <button type="submit" class="btn btn-info col-2">Save</button>
+            </form>
+
+        </td>
+        <br>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
