@@ -1,7 +1,7 @@
-package entities;
-
-public enum EventStatus {
-    POSTPONED,
-    ACTIVE,
-    CLOSED
-}
+//package entities;
+//
+//public enum EventStatus {
+//    POSTPONED,
+//    ACTIVE,
+//    CLOSED
+//}

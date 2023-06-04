@@ -1,7 +1,11 @@
 package com.nss.account;
 
+//import com.nss.account.config.AccountPrincipal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+//import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+//import org.springframework.security.core.Authentication;
+//import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -28,12 +32,20 @@ public class AccountService {
         user.setRole(account.getRole());
         user.setPassword(password);
 
+//        Authentication authentication = new UsernamePasswordAuthenticationToken(account.getEmail(), password);
+//// Установка аутентификации в контекст безопасности
+//        SecurityContextHolder.getContext().setAuthentication(authentication);
+
         return accountRepository.save(user);
     }
     public Account login(String email, String password)
     {
         Account user = this.findByEmail(email);
         if (passwordEncoder.matches(password, user.getPassword())) {
+//            Authentication authentication = new UsernamePasswordAuthenticationToken(user.getEmail(), password);
+
+// Установка аутентификации в контекст безопасности
+//            SecurityContextHolder.getContext().setAuthentication(authentication);
             return user;
         } else
         {
@@ -81,4 +93,18 @@ public class AccountService {
         accountRepository.deleteById(id);
     }
 
+    public Account findByActive(boolean b) {
+        Optional<Account> result = Optional.ofNullable(accountRepository.findByActive(true));
+
+        Account account = null;
+        if(result.isPresent())
+        {
+            account = result.get();
+        }
+        else
+        {
+            throw new RuntimeException("Did not find account ");
+        }
+        return account;
+    }
 }

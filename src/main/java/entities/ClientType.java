@@ -1,6 +1,6 @@
-package entities;
-
-public enum ClientType {
-    AGENCY,
-    OTHER
-}
+//package entities;
+//
+//public enum ClientType {
+//    AGENCY,
+//    OTHER
+//}

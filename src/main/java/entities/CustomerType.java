@@ -1,6 +1,6 @@
-package entities;
-
-public enum CustomerType {
-    INDIVIDUAL,
-    CORPORATE
-}
+//package entities;
+//
+//public enum CustomerType {
+//    INDIVIDUAL,
+//    CORPORATE
+//}

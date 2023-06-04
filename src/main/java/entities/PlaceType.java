@@ -1,6 +1,6 @@
-package entities;
-
-public enum PlaceType {
-    CONCERTHALL,
-    STADIUM
-}
+//package entities;
+//
+//public enum PlaceType {
+//    CONCERTHALL,
+//    STADIUM
+//}
