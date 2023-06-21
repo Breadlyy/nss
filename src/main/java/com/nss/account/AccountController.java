@@ -1,5 +1,6 @@
 package com.nss.account;
 
+
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import jakarta.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.List;
 //import org.springframework.security.core.Authentication;
@@ -17,6 +20,8 @@ import java.util.List;
 @Controller
 public class AccountController {
 
+    @Autowired
+    private HttpServletResponse response;
     private final AccountService accountService;
     private final SessionRepository sessionRepository;
 
@@ -58,20 +63,30 @@ public class AccountController {
     }
 
     @PostMapping("/save")
-    public String saveAccount(@ModelAttribute("account") Account account, HttpSession session)
+    public String saveAccount(Model model, HttpServletRequest request, @ModelAttribute("account") Account account, HttpSession session)
     {
         sessionRepository.saveSession(session.getId(), account.getEmail());
+        Cookie cookie = new Cookie("username", sessionRepository.getUsernameBySessionId(session.getId()));
+        cookie.setPath("/");
+        response.addCookie(cookie);
         accountService.registerNewUserAccount(account);
-        if(account.getRole().equals("seller")) return "accounts/seller-page";
-        if(account.getRole().equals("buyer")) return "accounts/buyer-page";
+        if(account.getRole().equals("seller")) {
+            model.addAttribute("username", account.getEmail());
+            return "accounts/seller-page";
+        }
+        if(account.getRole().equals("buyer")) {
+            model.addAttribute("username", account.getEmail());
+            return "accounts/buyer-page";
+        }
         //return "redirect:/api/account/list";
         return null;
     }
     @PostMapping("/signIn")
-    public String login(@ModelAttribute("account") Account account, HttpSession session)
+    public String login(@ModelAttribute("account") Account account, HttpSession session, Model model)
     {
         sessionRepository.saveSession(session.getId(), account.getEmail());
         Account user = accountService.login(account.getEmail(), account.getPassword());
+        model.addAttribute("userId", account.getId());
         if(user != null) return "accounts/seller-page";
         return "accounts/buyer-page";
     }
@@ -99,7 +114,18 @@ public class AccountController {
         response.getWriter().write(username);
     }
     @GetMapping("/currentSession")
-    public void sesseion(HttpSession session, HttpServletResponse response) throws IOException {
+    public void session(HttpSession session, HttpServletResponse response) throws IOException {
         response.getWriter().write(session.getId());
     }
+//    public String getUsernameFromCookie(HttpServletRequest request) {
+//        Cookie[] cookies = request.getCookies();
+//        if (cookies != null) {
+//            for (Cookie cookie : cookies) {
+//                if ("username".equals(cookie.getName())) {
+//                    return cookie.getValue();
+//                }
+//            }
+//        }
+//        return null;
+//    }
 }
