@@ -31,12 +31,12 @@ public class AccountService {
         user.setEmail(account.getEmail());
         user.setRole(account.getRole());
         user.setPassword(password);
-
+        accountRepository.save(user);
 //        Authentication authentication = new UsernamePasswordAuthenticationToken(account.getEmail(), password);
 //// Установка аутентификации в контекст безопасности
 //        SecurityContextHolder.getContext().setAuthentication(authentication);
 
-        return accountRepository.save(user);
+        return accountRepository.findByEmail(account.getEmail());
     }
     public Account login(String email, String password)
     {

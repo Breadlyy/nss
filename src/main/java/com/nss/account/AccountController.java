@@ -63,19 +63,18 @@ public class AccountController {
     }
 
     @PostMapping("/save")
-    public String saveAccount(Model model, HttpServletRequest request, @ModelAttribute("account") Account account, HttpSession session)
+    public String saveAccount(Model model, @ModelAttribute("account") Account account, HttpSession session)
     {
         sessionRepository.saveSession(session.getId(), account.getEmail());
-        Cookie cookie = new Cookie("username", sessionRepository.getUsernameBySessionId(session.getId()));
-        cookie.setPath("/");
-        response.addCookie(cookie);
-        accountService.registerNewUserAccount(account);
+//        Cookie cookie = new Cookie("username", sessionRepository.getUsernameBySessionId(session.getId()));
+//        cookie.setPath("/");
+//        response.addCookie(cookie);
+       Account acc =  accountService.registerNewUserAccount(account);
+        model.addAttribute("userId", acc.getId());
         if(account.getRole().equals("seller")) {
-            model.addAttribute("username", account.getEmail());
             return "accounts/seller-page";
         }
         if(account.getRole().equals("buyer")) {
-            model.addAttribute("username", account.getEmail());
             return "accounts/buyer-page";
         }
         //return "redirect:/api/account/list";
@@ -86,7 +85,7 @@ public class AccountController {
     {
         sessionRepository.saveSession(session.getId(), account.getEmail());
         Account user = accountService.login(account.getEmail(), account.getPassword());
-        model.addAttribute("userId", account.getId());
+        model.addAttribute("userId", user.getId());
         if(user != null) return "accounts/seller-page";
         return "accounts/buyer-page";
     }
