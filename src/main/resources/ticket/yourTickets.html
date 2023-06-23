@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>My Page</title>
+</head>
+<body>
+
+
+<table>
+    <thead>
+
+    </thead>
+    <tbody>
+    <a th:href="@{/api/account/list}">Create an event</a>
+    <h2>Available tickets</h2>
+    <tr th:each="ticket : ${tickets}">
+        <td>
+           Ticket id: <span th:text="*{ticket.id}"></span>
+           seat: <span th:text="*{ticket.seat}"></span>
+            number :<span th:text="*{ticket.number}"></span>
+        </td>
+        <br>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
