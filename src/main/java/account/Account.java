@@ -24,13 +24,16 @@ public class Account {
     private String role;
     @Column(name = "password")
     private String password;
-    public Account(int id, String firstName, String lastName, String email, String role, String password) {
+    @Column(name = "ticket")
+    private Integer ticket;
+    public Account(int id, String firstName, String lastName, String email, String role, Integer ticket, String password) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.role = role;
         this.password = password;
+        this.ticket = ticket;
     }
 
     public Account() {

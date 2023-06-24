@@ -1,5 +1,6 @@
 package account;
 
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -52,19 +53,29 @@ public class AccountController {
     }
 
     @PostMapping("/save")
-    public String saveAccount(@ModelAttribute("account") Account account)
+    public String saveAccount(@ModelAttribute("account") Account account, Model model)
     {
         accountService.registerNewUserAccount(account);
+        Account acc = accountService.findByEmail(account.getEmail());
+        model.addAttribute("userId", acc.getId());
         if(account.getRole().equals("seller")) return "accounts/seller-page";
         if(account.getRole().equals("buyer")) return "accounts/buyer-page";
         //return "redirect:/api/account/list";
         return null;
     }
     @PostMapping("/signIn")
-    public String login(@ModelAttribute("account") Account account)
+    public String login(@ModelAttribute("account") Account account, Model model)
     {
         Account user = accountService.login(account.getEmail(), account.getPassword());
+        Account acc = accountService.findByEmail(account.getEmail());
+        model.addAttribute("userId", acc.getId());
         if(user != null) return "accounts/seller-page";
         return "accounts/buyer-page";
+    }
+    @GetMapping("/logout")
+    public String logout(HttpSession session) {
+        String sessionId = session.getId();
+        session.invalidate(); // Инвалидируем сессию
+        return "redirect:signInForm";
     }
 }
