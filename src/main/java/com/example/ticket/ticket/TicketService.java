@@ -1,6 +1,7 @@
-package ticket;
+package com.example.ticket.ticket;
 
 import com.example.ticket.ticket.entities.Account;
+import com.example.ticket.ticket.entities.Event;
 import com.example.ticket.ticket.entities.Ticket;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,11 +13,13 @@ import java.util.Optional;
 public class TicketService {
     TicketRepository ticketRepository;
     AccountRepository accountRepository;
+    EventRepository eventRepository;
 
     @Autowired
-    public TicketService(TicketRepository ticketRepository, AccountRepository accountRepository) {
+    public TicketService(TicketRepository ticketRepository, AccountRepository accountRepository, EventRepository eventRepository) {
         this.ticketRepository = ticketRepository;
         this.accountRepository = accountRepository;
+        this.eventRepository = eventRepository;
     }
 
     public List<Ticket> findAll() {
@@ -87,5 +90,13 @@ public class TicketService {
             throw new RuntimeException("Did not find account id - " + id);
         }
         return account;
+    }
+    public List<Event> findAllEvents()
+    {
+        return eventRepository.findAll();
+    }
+    public List<Ticket> findAllTicketsByEventId(Integer eventId)
+    {
+        return ticketRepository.findAllByEvent_Id(eventId);
     }
 }

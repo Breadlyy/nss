@@ -1,6 +1,10 @@
-package ticket.entities;
+package com.example.ticket.ticket.entities;
 
-import lombok.*;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "place")

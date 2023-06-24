@@ -1,4 +1,4 @@
-package ticket;
+package com.example.ticket.ticket;
 
 import com.example.ticket.ticket.entities.Account;
 import org.springframework.data.jpa.repository.JpaRepository;

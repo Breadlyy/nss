@@ -1,4 +1,4 @@
-package ticket.entities;
+package com.example.ticket.ticket.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;

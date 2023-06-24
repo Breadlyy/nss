@@ -1,6 +1,7 @@
-package ticket;
+package com.example.ticket.ticket;
 
 import com.example.ticket.ticket.entities.Account;
+import com.example.ticket.ticket.entities.Event;
 import com.example.ticket.ticket.entities.Ticket;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -33,10 +34,10 @@ public class TicketController {
         session.setAttribute("userId", userId);
         return "redirect:/allTickets";
     }
-    @GetMapping("/allTickets")
-    public String allTickets(Model model)
+    @PostMapping("/allTickets")
+    public String allTickets(Model model, @RequestParam("eventId") Integer eventId)
     {
-        List<Ticket> tickets = ticketService.findAll();
+        List<Ticket> tickets = ticketService.findAllTicketsByEventId(eventId);
 
         for(int i = 0; i < tickets.size() - 1; i++)
         {
@@ -48,7 +49,7 @@ public class TicketController {
         model.addAttribute("tickets", tickets);
 
        // sessionRepository.saveSession(session.getId(), String.valueOf(userId));
-        return "ticket/allTickets";
+        return "allTickets";
     }
     @GetMapping("/yourTickets")
     public String yourTickets(Model model, HttpSession session)
@@ -57,7 +58,7 @@ public class TicketController {
         Account account = ticketService.findAccountById(userId);
         List<Ticket> tickets = ticketService.findAllByCustomer_email(account.getEmail());
         model.addAttribute("tickets", tickets);
-        return "ticket/yourTickets";
+        return "yourTickets";
     }
 
     @PostMapping("/addTicket")
@@ -69,6 +70,13 @@ public class TicketController {
         Integer userId = (Integer) session.getAttribute("userId");
         ticketService.addTicket(id,userId);
         return "redirect:/yourTickets";
+    }
+    @GetMapping("/allEvents")
+    public String allEvents(Model model)
+    {
+        List<Event> events = ticketService.findAllEvents();
+        model.addAttribute("events", events);
+        return "allEvents";
     }
     @GetMapping("/logout")
     public String logout(HttpSession session) {

@@ -1,4 +1,4 @@
-package ticket;
+package com.example.ticket.ticket;
 
 
 import org.springframework.boot.SpringApplication;

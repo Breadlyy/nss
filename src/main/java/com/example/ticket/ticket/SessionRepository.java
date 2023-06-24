@@ -1,4 +1,4 @@
-package ticket;
+package com.example.ticket.ticket;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
