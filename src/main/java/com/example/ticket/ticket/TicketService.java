@@ -38,8 +38,8 @@ public class TicketService {
         }
     }
 
-    public List<Ticket> findAllByCustomer_email(String email) {
-        return ticketRepository.findAllByEmail(email);
+    public List<Ticket> findAllByCustomer_email(Integer userId) {
+        return ticketRepository.findAllByOwnerId(userId);
     }
 
     public void addTicket(Integer ticketId, Integer userId) {
@@ -65,8 +65,7 @@ public class TicketService {
         {
             throw new RuntimeException("Did not find ticket id - " + ticketId);
         }
-            ticket.setEmail(account.getEmail());
-            ticket.setBought(true);
+            ticket.setOwnerId(userId);
             ticketRepository.save(ticket);
 
             account.setTicket(ticketId);

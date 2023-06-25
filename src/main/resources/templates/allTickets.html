@@ -17,12 +17,14 @@
     <h2>Buy tickets</h2>
     <tr th:each="ticket : ${tickets}">
         <td>
-            <form th:action="@{/addTicket}"  method="post">
+            <form th:action="@{/addTicket}" method="post">
                 <input type="text" name="id" th:value="*{ticket.id}" hidden>
-            Ticket id: <span th:field="*{ticket.getId()}" th:text="*{ticket.id}"></span>;
-            seat:<span th:text="*{ticket.seat}"></span>;
-            number :<span th:text="*{ticket.number}"></span>
+                Ticket id: <span th:field="*{ticket.getId()}" th:text="*{ticket.id}"></span>;
+                seat:<span th:text="*{ticket.seat}"></span>;
+                place:<span th:text="*{ticket.getPlace().getId()}"></span>;
+                event:<span th:text="*{ticket.getEvent().name}"></span>;
                 <button type="submit" class="btn btn-info col-2">Save</button>
+                <hr>
             </form>
 
         </td>

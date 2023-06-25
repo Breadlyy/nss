@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <link rel="stylesheet" type="text/css" href="style.css ">
     <title>My Page</title>
 </head>
 <body>
@@ -12,16 +13,23 @@
     </thead>
     <tbody>
     <nav>
-        <a href="/yourTickets">Available tickets</a>
+        <a style="display: inline-block;
+    border: 1px solid #ccc;
+    background-color: #f2f2f2;
+    color: #333;
+    padding: 8px 16px;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;" href="/yourTickets">Available tickets</a>
     </nav>
     <h2>Buy tickets</h2>
     <tr th:each="event : ${events}">
         <td>
             <form th:action="@{/allTickets}" method="post">
                 <input type="text" name="eventId" th:value="*{event.id}" hidden>
-                Ticket id: <span th:text="*{event.id}"></span>;
-                seat:<span th:text="*{event.name}"></span>;
-                number :<span th:text="*{event.description}"></span>
+                Event id: <span th:text="*{event.id}"></span>;
+                Event name:<span th:text="*{event.name}"></span>;
+                Event description:<span th:text="*{event.description}"></span>
                 <button type="submit" class="btn btn-info col-2">Tickets</button>
             </form>
 

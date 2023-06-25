@@ -11,13 +11,19 @@
 
     </thead>
     <tbody>
-    <a th:href="@{/api/account/list}">Create an event</a>
+    <a style="display: inline-block;
+    border: 1px solid #ccc;
+    background-color: #f2f2f2;
+    color: #333;
+    padding: 8px 16px;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;" th:href="@{/api/account/list}">Create an event</a>
     <h2>Available tickets</h2>
     <tr th:each="ticket : ${tickets}">
         <td>
            Ticket id: <span th:text="*{ticket.id}"></span>
            seat: <span th:text="*{ticket.seat}"></span>
-            number :<span th:text="*{ticket.number}"></span>
         </td>
         <br>
     </tr>

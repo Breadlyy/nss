@@ -32,19 +32,15 @@ public class TicketController {
     public String Tickets(Model model, @RequestParam("userId") Integer userId, HttpSession session)
     {
         session.setAttribute("userId", userId);
-        return "redirect:/allTickets";
+        return "redirect:/allEvents";
     }
     @PostMapping("/allTickets")
     public String allTickets(Model model, @RequestParam("eventId") Integer eventId)
     {
         List<Ticket> tickets = ticketService.findAllTicketsByEventId(eventId);
 
-        for(int i = 0; i < tickets.size() - 1; i++)
-        {
-            if(tickets.get(i).getEmail() != null)
-            {
-                tickets.remove(i);
-            }
+        for (Ticket t: tickets) {
+            if(t.getOwnerId() != null) tickets.remove(t);
         }
         model.addAttribute("tickets", tickets);
 
@@ -56,7 +52,7 @@ public class TicketController {
     {
         Integer userId = (Integer) session.getAttribute("userId");
         Account account = ticketService.findAccountById(userId);
-        List<Ticket> tickets = ticketService.findAllByCustomer_email(account.getEmail());
+        List<Ticket> tickets = ticketService.findAllByCustomer_email(userId);
         model.addAttribute("tickets", tickets);
         return "yourTickets";
     }

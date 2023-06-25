@@ -19,13 +19,6 @@ public class Ticket {
     @Column(name = "id")
     private Long id;
 
-//    @Enumerated
-//    @Column(name = "ticket_type", nullable = false)
-//    private TicketType ticketType;
-
-    @Column(name = "bought")
-    private boolean bought;
-
     @ManyToOne(cascade = CascadeType.PERSIST, optional = false)
     @JoinColumn(name = "event_id", nullable = false)
     private Event event;
@@ -41,11 +34,8 @@ public class Ticket {
     @Column (name = "seat", nullable = false)
     private Integer seat;
 
-    @Column(name = "number", nullable = false, unique = true)
-    private Long number;
-
-    @Column(name = "email")
-    private String email;
+    @Column(name = "ownerId")
+    private Integer ownerId;
 
 
 
