@@ -28,7 +28,7 @@ public class EventController {
     public String createEvent(FormData formData) {
         if (formData.isValid()) {
             // Call your function here
-            eventService.createEvent(formData.getEventName(), formData.getEventDescription(), formData.getDateField());
+            eventService.createEvent(formData.getEventName(), formData.getDateField(), formData.getEventDescription());
             // You can perform any necessary operations with the form data
             // and return the appropriate view or redirect to another page
             return "home-screen";
@@ -38,7 +38,7 @@ public class EventController {
     }
 
 
-    public class FormData {
+    public static class FormData {
         private String eventName;
         private String eventDescription;
         private String ticketNumber;

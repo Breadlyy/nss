@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import entities.EventStatus;
+
 
 import java.util.Date;
 
@@ -26,5 +28,12 @@ public class Event {
     private Date date;
     @Column(name="status")
     private EventStatus status;
-
+    @Column(name = "description")
+    private String description;
+    public Event(String name, Date date, String description) {
+        this.name = name;
+        this.date = date;
+        this.status = EventStatus.Active;
+        this.description = description;
+    }
 }
