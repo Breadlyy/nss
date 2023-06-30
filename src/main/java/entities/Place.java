@@ -1,4 +1,4 @@
-package example.entities;
+package entities;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -6,25 +6,15 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
-import java.util.Date;
-
 @Entity
-@Table(name = "event")
+@Table(name = "place")
 @Getter
 @Setter
 @AllArgsConstructor
 @RequiredArgsConstructor
-public class Event {
-
+public class Place {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-    @Column(name = "name")
-    private String name;
-    @Column(name="date")
-    private Date date;
-    @Column(name="status")
-    private EventStatus status;
-
+    private String id;
 }

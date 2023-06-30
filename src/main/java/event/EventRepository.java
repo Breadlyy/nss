@@ -1,6 +1,6 @@
-package example.event;
+package event;
 
-import example.entities.EventStatus;
+import entities.EventStatus;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -13,7 +13,7 @@ public class EventRepository {
     public EventRepository(JdbcTemplate jdbcTemplate){
         this.jdbcTemplate = jdbcTemplate;
     }
-    public void createEvent(String name, Date date){
-        jdbcTemplate.update("INSERT INTO events (name, date, status) VALUES (?,?,?)", name, date, EventStatus.Active);
+    public void createEvent(String name, String description, Date date){
+        jdbcTemplate.update("INSERT INTO event (name, description, date, status) VALUES (?,?,?,?)", name, description, date, EventStatus.Active);
     }
 }

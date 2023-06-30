@@ -1,4 +1,5 @@
-package example.event;
+package event;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,7 +14,7 @@ public class EventService {
         this.eventRepository = eventRepository;
     }
 
-    public void createEvent(String name, Date date){
-        eventRepository.createEvent(name, date);
+    public void createEvent(String name, String description, Date date){
+        eventRepository.createEvent(name, description, date);
     }
 }

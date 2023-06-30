@@ -1,4 +1,4 @@
-package example.entities;
+package entities;
 
 public enum EventStatus {
     Active,
