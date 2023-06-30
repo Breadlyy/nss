@@ -6,18 +6,17 @@
 </head>
 <body>
 <h1>Create Event</h1>
-<form action="#" th:action="@{/createEvent}" th:object="${formData}" method="post">
-    <label for="textField1">Event Name:</label>
-    <input type="text" id="textField1" th:field="*{eventName}"><br>
+<form action="#" th:action="@{/createEvent}" th:object="${event}" method="POST">
+    <input type="hidden" th:field="*{id}">
 
-    <label for="textField2">Event Description:</label>
-    <input type="text" id="textField2" th:field="*{eventDescription}"><br>
+    <label for="eventName">Event Name:</label>
+    <input type="text" id="eventName" th:field="*{name}"><br>
 
-    <label for="textField3">Number of Tickets:</label>
-    <input type="text" id="textField3" th:field="*{ticketNumber}"><br>
+    <label for="eventDescription">Event Description:</label>
+    <input type="text" id="eventDescription" th:field="*{description}"><br>
 
     <label for="dateField">Event Date:</label>
-    <input type="date" id="dateField" th:field="*{dateField}"><br>
+    <input type="date" id="dateField" th:field="*{date}"><br>
 
     <input type="submit" value="Submit">
 </form>

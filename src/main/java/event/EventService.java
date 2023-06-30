@@ -1,7 +1,6 @@
 package event;
 
 
-import entities.Event;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,9 +14,13 @@ public class EventService {
         this.eventRepository = eventRepository;
     }
 
-    public void createEvent(String name, Date date, String description){
+    public void createEvent(Event event){
 
-        Event event = new Event(name, date, description);
-        eventRepository.save(event);
+        Event ev = new Event();
+        ev.setName(event.getName());
+        ev.setDate(event.getDate());
+        ev.setDescription(event.getDescription());
+        ev.setStatus("Active");
+        eventRepository.save(ev);
     }
 }

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -20,21 +21,22 @@ public class EventController {
     }
     @GetMapping("/eventForm")
     public String showForm(Model model) {
-        model.addAttribute("formData", new FormData());
+        model.addAttribute("event", new Event());
         return "create-event";
     }
 
     @PostMapping("/createEvent")
-    public String createEvent(FormData formData) {
-        if (formData.isValid()) {
-            // Call your function here
-            eventService.createEvent(formData.getEventName(), formData.getDateField(), formData.getEventDescription());
-            // You can perform any necessary operations with the form data
-            // and return the appropriate view or redirect to another page
-            return "home-screen";
-        } else {
-            return "create-event";
-        }
+    public String createEvent(@ModelAttribute("event") Event event, Model model) {
+//        if (formData.isValid()) {
+        // Call your function here
+        eventService.createEvent(event);
+        // You can perform any necessary operations with the form data
+        // and return the appropriate view or redirect to another page
+        return "home-screen";
+//        } else {
+//            return "create-event";
+//        }
+//    }
     }
 
 

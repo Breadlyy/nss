@@ -1,4 +1,4 @@
-package entities;
+package event.entities;
 
 public enum EventStatus {
     Active,
