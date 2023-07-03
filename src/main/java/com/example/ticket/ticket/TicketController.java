@@ -20,11 +20,11 @@ import java.util.List;
 @RequestMapping("/")
 public class TicketController {
 
-    TicketService ticketService;
+    TicketServiceImp ticketServiceImp;
     SessionRepository sessionRepository;
 
-    public TicketController(TicketService ticketService, SessionRepository sessionRepository) {
-        this.ticketService = ticketService;
+    public TicketController(TicketServiceImp ticketServiceImp, SessionRepository sessionRepository) {
+        this.ticketServiceImp = ticketServiceImp;
         this.sessionRepository = sessionRepository;
     }
 
@@ -37,7 +37,7 @@ public class TicketController {
     @PostMapping("/allTickets")
     public String allTickets(Model model, @RequestParam("eventId") Integer eventId)
     {
-        List<Ticket> tickets = ticketService.findAllTicketsByEventId(eventId);
+        List<Ticket> tickets = ticketServiceImp.findAllTicketsByEventId(eventId);
 
         model.addAttribute("tickets", tickets);
 
@@ -48,26 +48,27 @@ public class TicketController {
     public String yourTickets(Model model, HttpSession session)
     {
         Integer userId = (Integer) session.getAttribute("userId");
-        Account account = ticketService.findAccountById(userId);
-        List<Ticket> tickets = ticketService.findAllByCustomer_email(userId);
+        Account account = ticketServiceImp.findAccountById(userId);
+        List<Ticket> tickets = ticketServiceImp.findAllByCustomer_email(userId);
         model.addAttribute("tickets", tickets);
+        model.addAttribute("account", account);
         return "yourTickets";
     }
 
     @PostMapping("/addTicket")
     public String addTicket(@RequestParam("id") Integer id, HttpSession session)
     {
-        Ticket ticket = ticketService.findById(id);
+        Ticket ticket = ticketServiceImp.findById(id);
 //        String uid = (String) session.getAttribute("userId");
 //        Integer userId = Integer.valueOf(uid);
         Integer userId = (Integer) session.getAttribute("userId");
-        ticketService.addTicket(id,userId);
+        ticketServiceImp.addTicket(id,userId);
         return "redirect:/yourTickets";
     }
     @GetMapping("/allEvents")
     public String allEvents(Model model)
     {
-        List<Event> events = ticketService.findAllEvents();
+        List<Event> events = ticketServiceImp.findAllEvents();
         model.addAttribute("events", events);
         return "allEvents";
     }
