@@ -12,13 +12,10 @@
 <body>
 <div class="container"
      style="text-align: center;  width: 60%; height: 20%; margin: 20% auto; display: block; ">
-  <a th:href="@{/api/account/list}"
-     style="margin: 10px; font-size: 250%; width: 40%; height: 120px; background-color: black; color: white">View your
+  <a  class="btn btn-info" style="margin: 10px; font-size: 300%; width: 40%; height: 120px; background-color: black; color: white" th:href="@{'http://localhost:8081/yourTicketsBuyer?userId=' + ${userId}}">View your
     events</a>
   <br><br>
-  <a th:href="@{/api/account/list}"
-     style="margin: 10px; font-size: 250%; width: 40%; height: 120px; background-color: black; color: white">View all
-    events</a>
+  <a  class="btn btn-info" style="margin: 10px; font-size: 300%; width: 40%; height: 120px; background-color: black; color: white" th:href="@{'http://localhost:8081/?userId=' + ${userId}}">Events</a>
 </div>
 </body>
 </html>
