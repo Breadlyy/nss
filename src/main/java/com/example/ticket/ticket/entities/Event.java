@@ -1,10 +1,9 @@
 package com.example.ticket.ticket.entities;
 
+
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+
 
 import java.util.Date;
 
@@ -13,19 +12,39 @@ import java.util.Date;
 @Getter
 @Setter
 @AllArgsConstructor
-@RequiredArgsConstructor
 public class Event {
 
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-    @Column(name = "name")
-    private String name;
-    @Column(name="date")
-    private Date date;
-    @Column(name="status")
-    private EventStatus status;
+    private int id;
     @Column(name = "description")
     private String description;
+    @Column(name = "name")
+    private String name;
+
+    @Column(name = "status")
+    private String status;
+
+    @Column(name = "date")
+    private String date;
+
+    public Event(Integer id, String name, String date, String description) {
+        this.id = id;
+        this.name = name;
+        this.date = date;
+        this.status = "Active";
+        this.description = description;
+    }
+
+    public Event(String name, String date, String description) {
+        this.name = name;
+        this.date = date;
+        this.status = "Active";
+        this.description = description;
+    }
+    public Event()
+    {
+
+    }
 }

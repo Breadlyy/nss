@@ -40,7 +40,7 @@ public class TicketController {
         List<Ticket> tickets = ticketService.findAllTicketsByEventId(eventId);
 
         for (Ticket t: tickets) {
-            if(t.getOwnerId() != null) tickets.remove(t);
+            if(t.isBought()) tickets.remove(t);
         }
         model.addAttribute("tickets", tickets);
 

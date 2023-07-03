@@ -27,7 +27,8 @@ public class Ticket {
     @ManyToOne(cascade = CascadeType.PERSIST, optional = false)
     @JoinColumn(name = "place_id", nullable = false)
     private Place place;
-
+    @Column(name = "bought")
+    private boolean bought;
 //    @Embedded
 //    private Sector sector;
 
