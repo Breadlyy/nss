@@ -39,9 +39,6 @@ public class TicketController {
     {
         List<Ticket> tickets = ticketService.findAllTicketsByEventId(eventId);
 
-        for (Ticket t: tickets) {
-            if(t.isBought()) tickets.remove(t);
-        }
         model.addAttribute("tickets", tickets);
 
        // sessionRepository.saveSession(session.getId(), String.valueOf(userId));

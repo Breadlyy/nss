@@ -65,7 +65,6 @@ public class TicketService {
         {
             throw new RuntimeException("Did not find ticket id - " + ticketId);
         }
-            ticket.setBought(true);
             ticket.setOwnerId(userId);
             ticketRepository.save(ticket);
 
@@ -97,6 +96,6 @@ public class TicketService {
     }
     public List<Ticket> findAllTicketsByEventId(Integer eventId)
     {
-        return ticketRepository.findAllByEvent_Id(eventId);
+        return ticketRepository.findAllByEvent(eventId);
     }
 }

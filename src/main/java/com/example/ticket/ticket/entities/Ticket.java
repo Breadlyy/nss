@@ -19,26 +19,14 @@ public class Ticket {
     @Column(name = "id")
     private Long id;
 
-    @ManyToOne(cascade = CascadeType.PERSIST, optional = false)
-    @JoinColumn(name = "event_id", nullable = false)
-    private Event event;
-
-
-    @ManyToOne(cascade = CascadeType.PERSIST, optional = false)
-    @JoinColumn(name = "place_id", nullable = false)
-    private Place place;
-    @Column(name = "bought")
-    private boolean bought;
-//    @Embedded
-//    private Sector sector;
+    @Column(name = "event_id", nullable = false)
+    private Integer event;
 
     @Column (name = "seat", nullable = false)
     private Integer seat;
 
-    @Column(name = "ownerId")
+    @Column(name = "owner_id")
     private Integer ownerId;
-
-
 
 
 }
