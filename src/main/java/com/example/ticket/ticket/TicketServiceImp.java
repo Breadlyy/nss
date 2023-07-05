@@ -10,12 +10,31 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * The type Ticket service imp.
+ */
 @Service
 public class TicketServiceImp implements TicketService{
+    /**
+     * The Ticket repository.
+     */
     TicketRepository ticketRepository;
+    /**
+     * The Account repository.
+     */
     AccountRepository accountRepository;
+    /**
+     * The Event repository.
+     */
     EventRepository eventRepository;
 
+    /**
+     * Instantiates a new Ticket service imp.
+     *
+     * @param ticketRepository  the ticket repository
+     * @param accountRepository the account repository
+     * @param eventRepository   the event repository
+     */
     @Autowired
     public TicketServiceImp(TicketRepository ticketRepository, AccountRepository accountRepository, EventRepository eventRepository) {
         this.ticketRepository = ticketRepository;
@@ -27,6 +46,11 @@ public class TicketServiceImp implements TicketService{
         return ticketRepository.findAllByOrderByIdAsc();
     }
 
+    /**
+     *
+     * @param id
+     * @return ticket in accordance with id
+     */
     public Ticket findById(Integer id) {
         Optional<Ticket> result = ticketRepository.findById(id);
 
@@ -43,6 +67,11 @@ public class TicketServiceImp implements TicketService{
         return ticketRepository.findAllByOwnerId(userId);
     }
 
+    /**
+     * add ticket to the user's "Available tickets" section
+     * @param ticketId
+     * @param userId
+     */
     public void addTicket(Integer ticketId, Integer userId) {
         Optional<Account> result = accountRepository.findById(userId);
 
