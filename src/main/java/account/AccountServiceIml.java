@@ -7,27 +7,40 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * The type Account service iml.
+ */
 @Service
 public class AccountServiceIml implements AccountService {
     private AccountRepository accountRepository;
     private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
+    /**
+     * Instantiates a new Account service iml.
+     *
+     * @param accountRepository the account repository
+     */
     @Autowired
     public AccountServiceIml(AccountRepository accountRepository)
     {
         this.accountRepository = accountRepository;
     }
+
     public Account registerNewUserAccount(Account account) {
         String password = passwordEncoder.encode(account.getPassword());
+        Account acc = accountRepository.findByEmail(account.getEmail());
+        if(acc != null) return  null;
         Account user = Account.builder().
                 firstName(account.getFirstName())
                 .lastName(account.getLastName())
                 .email(account.getEmail())
+                .role(account.getRole())
                 .password(password)
                 .build();
 
         return accountRepository.save(user);
     }
+
     public Account login(String email, String password)
     {
         Account user = this.findByEmail(email);
@@ -38,6 +51,7 @@ public class AccountServiceIml implements AccountService {
             return null;
         }
     }
+
 
     public List<Account> findAll()
     {

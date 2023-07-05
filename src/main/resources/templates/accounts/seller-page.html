@@ -12,7 +12,7 @@
 <body>
     <div class="container"
          style="text-align: center;  width: 60%; height: 20%; margin: 20% auto; display: block; ">
-    <a  class="btn btn-info" style="margin: 10px; font-size: 300%; width: 40%; height: 120px; background-color: black; color: white" th:href="@{'http://localhost:8082/eventForm'}">Create an
+    <a  class="btn btn-info" style="margin: 10px; font-size: 300%; width: 40%; height: 120px; background-color: black; color: white" th:href="@{'http://localhost:8082/eventForm?userId=' + ${userId}}">Create an
         event</a>
     <br><br>
     <a  class="btn btn-info" style="margin: 10px; font-size: 300%; width: 40%; height: 120px; background-color: black; color: white" th:href="@{'http://localhost:8081/yourTicketsBuyer?userId=' + ${userId}}">View your

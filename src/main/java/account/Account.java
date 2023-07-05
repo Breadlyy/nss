@@ -7,6 +7,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 
+/**
+ * The type Account.
+ */
 @Entity
 @Table(name = "account")
 @Getter
@@ -34,6 +37,18 @@ public class Account {
     private String password;
     @Column(name = "ticket")
     private Integer ticket;
+
+    /**
+     * Instantiates a new Account.
+     *
+     * @param id        the id
+     * @param firstName the first name
+     * @param lastName  the last name
+     * @param email     the email
+     * @param role      the role
+     * @param ticket    the ticket
+     * @param password  the password
+     */
     public Account(int id, String firstName, String lastName, String email, String role, Integer ticket, String password) {
         this.id = id;
         this.firstName = firstName;
@@ -44,16 +59,32 @@ public class Account {
         this.ticket = ticket;
     }
 
+    /**
+     * Instantiates a new Account.
+     */
     public Account() {
 
     }
 
+    /**
+     * Instantiates a new Account.
+     *
+     * @param firstName the first name
+     * @param lastName  the last name
+     * @param email     the email
+     */
     public Account(String firstName, String lastName, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
     }
 
+    /**
+     * Instantiates a new Account.
+     *
+     * @param email    the email
+     * @param password the password
+     */
     public Account(String email, String password) {
         this.email = email;
         this.password = password;

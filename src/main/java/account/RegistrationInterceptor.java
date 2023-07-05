@@ -8,9 +8,20 @@ import org.springframework.web.method.support.ModelAndViewContainer;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
+/**
+ * The type Registration interceptor.
+ */
 @Slf4j
 public class RegistrationInterceptor implements HandlerInterceptor {
 
+    /**
+     *
+     * @param request
+     * @param response
+     * @param handler
+     * @return getting registration request. take the email and password form model and check if it's not blank
+     * @throws Exception
+     */
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
             throws Exception {
@@ -19,7 +30,7 @@ public class RegistrationInterceptor implements HandlerInterceptor {
         String password = request.getParameter("password");
         // Проверьте почту и пароль здесь и выполните необходимые действия
 
-        if (email.isEmpty() || password.isEmpty()) {
+        if (email.isBlank() || password.isBlank()) {
             log.info("email or password is null");
             // Почта или пароль не заполнены, выполните соответствующие действия
             return false; // Остановить обработку запроса
@@ -27,7 +38,6 @@ public class RegistrationInterceptor implements HandlerInterceptor {
         log.info("everything is ok");
         return true; // Продолжить обработку запроса
     }
-
 
 
 
